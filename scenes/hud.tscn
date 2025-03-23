@@ -1,0 +1,72 @@
+[gd_scene load_steps=6 format=3 uid="uid://2rxpaf6ow5l4"]
+
+[ext_resource type="Texture2D" uid="uid://do1fidq6t41p5" path="res://assets/cozy farm/ui/UI.png" id="1_67d2j"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2jnwn"]
+atlas = ExtResource("1_67d2j")
+region = Rect2(63, 15.3411, 65, 69.6589)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tt6uj"]
+atlas = ExtResource("1_67d2j")
+region = Rect2(90, 112, 220, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1cst8"]
+atlas = ExtResource("1_67d2j")
+region = Rect2(64, 88, 16, 52)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t200k"]
+atlas = ExtResource("1_67d2j")
+region = Rect2(48, 88, 16, 52)
+
+[node name="Hud" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+alignment = 1
+
+[node name="calendar" type="TextureRect" parent="VBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 2
+texture = SubResource("AtlasTexture_2jnwn")
+stretch_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Inventory" type="TextureRect" parent="VBoxContainer/HBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+size_flags_vertical = 8
+texture = SubResource("AtlasTexture_tt6uj")
+stretch_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_direction = 2
+layout_mode = 2
+theme_override_constants/separation = 0
+alignment = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+size_flags_vertical = 8
+texture = SubResource("AtlasTexture_1cst8")
+stretch_mode = 2
+
+[node name="health_bar" type="TextureRect" parent="MarginContainer/HBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+size_flags_vertical = 8
+texture = SubResource("AtlasTexture_t200k")
+stretch_mode = 2
