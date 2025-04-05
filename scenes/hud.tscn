@@ -1,6 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://2rxpaf6ow5l4"]
+[gd_scene load_steps=14 format=3 uid="uid://2rxpaf6ow5l4"]
 
 [ext_resource type="Texture2D" uid="uid://do1fidq6t41p5" path="res://assets/cozy farm/ui/UI.png" id="1_67d2j"]
+[ext_resource type="Texture2D" uid="uid://c5a6prxvwig2t" path="res://assets/Sunnyside_World_Assets/UI/pickaxe.png" id="2_gcyfs"]
+[ext_resource type="Texture2D" uid="uid://beshaau3d763s" path="res://assets/Sunnyside_World_Assets/UI/indicator.png" id="3_dmvke"]
+[ext_resource type="Script" path="res://scripts/selected_item.gd" id="3_hqcwy"]
+[ext_resource type="Texture2D" uid="uid://4sh6dyd5lg80" path="res://assets/Sunnyside_World_Assets/UI/axe.png" id="3_wgpu1"]
+[ext_resource type="Texture2D" uid="uid://cajq8ygywa5rq" path="res://assets/Sunnyside_World_Assets/UI/water.png" id="4_06rhb"]
+[ext_resource type="Texture2D" uid="uid://2vwjmdv7a0si" path="res://assets/Sunnyside_World_Assets/UI/shovel.png" id="6_6cmhi"]
+[ext_resource type="Texture2D" uid="uid://c56fsjdasd7kj" path="res://assets/cozy farm/farming/seeds.png" id="6_upg76"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2jnwn"]
 atlas = ExtResource("1_67d2j")
@@ -18,18 +25,19 @@ region = Rect2(64, 88, 16, 52)
 atlas = ExtResource("1_67d2j")
 region = Rect2(48, 88, 16, 52)
 
-[node name="Hud" type="MarginContainer"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[sub_resource type="AtlasTexture" id="AtlasTexture_4h8i3"]
+atlas = ExtResource("6_upg76")
+region = Rect2(66, 0, 12, 16)
+
+[node name="Hud" type="Node"]
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
-layout_mode = 2
-alignment = 1
+offset_right = 640.0
+offset_bottom = 360.0
+alignment = 2
 
 [node name="calendar" type="TextureRect" parent="VBoxContainer"]
+visible = false
 texture_filter = 1
 layout_mode = 2
 size_flags_horizontal = 8
@@ -43,30 +51,134 @@ alignment = 1
 
 [node name="Inventory" type="TextureRect" parent="VBoxContainer/HBoxContainer"]
 texture_filter = 1
+layout_direction = 1
 layout_mode = 2
 size_flags_vertical = 8
 texture = SubResource("AtlasTexture_tt6uj")
 stretch_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/Inventory"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 8.0
+offset_right = 206.0
+offset_bottom = 25.0
+alignment = 2
+
+[node name="GridContainer" type="GridContainer" parent="VBoxContainer/HBoxContainer/Inventory/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/h_separation = 6
+columns = 9
+
+[node name="Panel1" type="Panel" parent="VBoxContainer/HBoxContainer/Inventory/HBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(16, 16)
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+[node name="Panel2" type="Panel" parent="VBoxContainer/HBoxContainer/Inventory/HBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+
+[node name="Panel3" type="Panel" parent="VBoxContainer/HBoxContainer/Inventory/HBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+
+[node name="Panel4" type="Panel" parent="VBoxContainer/HBoxContainer/Inventory/HBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+
+[node name="Panel5" type="Panel" parent="VBoxContainer/HBoxContainer/Inventory/HBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+
+[node name="Panel6" type="Panel" parent="VBoxContainer/HBoxContainer/Inventory/HBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+
+[node name="Panel7" type="Panel" parent="VBoxContainer/HBoxContainer/Inventory/HBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+
+[node name="Panel8" type="Panel" parent="VBoxContainer/HBoxContainer/Inventory/HBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+
+[node name="Panel9" type="Panel" parent="VBoxContainer/HBoxContainer/Inventory/HBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+
+[node name="Bar" type="MarginContainer" parent="."]
+visible = false
+offset_right = 640.0
+offset_bottom = 360.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Bar"]
 layout_direction = 2
 layout_mode = 2
 theme_override_constants/separation = 0
 alignment = 2
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer"]
+[node name="stamina_bar" type="TextureRect" parent="Bar/HBoxContainer"]
 texture_filter = 1
 layout_mode = 2
 size_flags_vertical = 8
 texture = SubResource("AtlasTexture_1cst8")
 stretch_mode = 2
 
-[node name="health_bar" type="TextureRect" parent="MarginContainer/HBoxContainer"]
+[node name="health_bar" type="TextureRect" parent="Bar/HBoxContainer"]
 texture_filter = 1
 layout_mode = 2
 size_flags_vertical = 8
 texture = SubResource("AtlasTexture_t200k")
+stretch_mode = 2
+
+[node name="SelectedItem" type="TextureRect" parent="."]
+offset_left = 228.0
+offset_top = 321.0
+offset_right = 236.0
+offset_bottom = 328.0
+texture = ExtResource("3_dmvke")
+stretch_mode = 2
+script = ExtResource("3_hqcwy")
+
+[node name="Tools" type="Node" parent="."]
+
+[node name="Axe" type="TextureRect" parent="Tools"]
+offset_left = 225.0
+offset_top = 337.0
+offset_right = 240.0
+offset_bottom = 353.0
+texture = ExtResource("3_wgpu1")
+stretch_mode = 2
+
+[node name="Water" type="TextureRect" parent="Tools"]
+offset_left = 249.0
+offset_top = 337.0
+offset_right = 262.0
+offset_bottom = 353.0
+texture = ExtResource("4_06rhb")
+stretch_mode = 2
+
+[node name="Pickaxe" type="TextureRect" parent="Tools"]
+offset_left = 270.0
+offset_top = 337.0
+offset_right = 283.0
+offset_bottom = 353.0
+texture = ExtResource("2_gcyfs")
+stretch_mode = 2
+
+[node name="Pickaxe2" type="TextureRect" parent="Tools"]
+offset_left = 291.0
+offset_top = 337.0
+offset_right = 305.0
+offset_bottom = 353.0
+texture = ExtResource("6_6cmhi")
+stretch_mode = 2
+
+[node name="Corn" type="TextureRect" parent="Tools"]
+offset_left = 314.0
+offset_top = 336.0
+offset_right = 326.0
+offset_bottom = 352.0
+texture = SubResource("AtlasTexture_4h8i3")
 stretch_mode = 2
