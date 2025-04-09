@@ -60,3 +60,18 @@ func _on_enter() -> void:
 func _on_exit() -> void:
     animated_sprite_2d.stop()
     pass
+
+# Fungsi tambahan untuk mendapatkan data galian untuk save
+func get_save_data() -> Array:
+    var serialized_tiles = []
+    for tile_pos in digged_tile_coords:
+        serialized_tiles.append({"x": tile_pos.x, "y": tile_pos.y})
+    return serialized_tiles
+
+# Fungsi untuk memuat ulang data galian dari save
+func load_save_data(data: Array) -> void:
+    digged_tile_coords.clear()
+    for tile_data in data:
+        var tile_pos = Vector2i(tile_data["x"], tile_data["y"])
+        digged_tile_coords.append(tile_pos)
+        ground_tilemap.set_cell(tile_pos, 0, Vector2i(50, 12))

@@ -429,6 +429,7 @@ animations = [{
 }]
 
 [node name="Player" type="CharacterBody2D"]
+physics_interpolation_mode = 2
 texture_filter = 1
 script = ExtResource("1_11xwb")
 
@@ -441,7 +442,6 @@ animation = &"walk"
 autoplay = "idle"
 
 [node name="Camera2D" type="Camera2D" parent="."]
-rotation = 0.0108943
 position_smoothing_enabled = true
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_node_state")]
