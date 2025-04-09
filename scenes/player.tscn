@@ -16,6 +16,7 @@
 [ext_resource type="Script" path="res://scripts/player/dig_state.gd" id="14_mywm7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u1w0r"]
+size = Vector2(11, 11)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mf0xe"]
 atlas = ExtResource("4_ieou2")
@@ -438,7 +439,7 @@ shape = SubResource("RectangleShape2D_u1w0r")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_srgeb")
-animation = &"walk"
+animation = &"idle"
 autoplay = "idle"
 
 [node name="Camera2D" type="Camera2D" parent="."]
