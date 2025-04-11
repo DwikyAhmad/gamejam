@@ -38,8 +38,8 @@ func _on_next_transitions() -> void:
     var tile_data = ground_tilemap.get_cell_tile_data(tile_pos)
     if tile_data and ((ground_tilemap.get_cell_atlas_coords(tile_pos) == Vector2i(50, 12) or ground_tilemap.get_cell_atlas_coords(tile_pos) == Vector2i(50, 13))):
         # Hapus tile
-        print("Plant tile")
         plant_tilemap.set_cell(tile_pos, 2, Vector2i(53, 12))  
+        Goals.goal_tracker.increment_seed()
 
     transition.emit("Idle")
 

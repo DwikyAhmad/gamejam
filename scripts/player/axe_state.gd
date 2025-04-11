@@ -38,7 +38,8 @@ func _on_next_transitions() -> void:
         var tile_data = ground_tilemap.get_cell_tile_data(tile_pos)
         if tile_data and ground_tilemap.get_cell_atlas_coords(tile_pos) == Vector2i(32, 5):
             # Hapus tile
-            ground_tilemap.set_cell(tile_pos, -1)  # -1 untuk menghapus tile        
+            ground_tilemap.set_cell(tile_pos, -1)  # -1 untuk menghapus tile
+            Goals.goal_tracker.increment_wood()        
 
         transition.emit("Idle")
     pass

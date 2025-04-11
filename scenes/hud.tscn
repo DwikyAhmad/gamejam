@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://2rxpaf6ow5l4"]
+[gd_scene load_steps=15 format=3 uid="uid://2rxpaf6ow5l4"]
 
 [ext_resource type="Texture2D" uid="uid://do1fidq6t41p5" path="res://assets/cozy farm/ui/UI.png" id="1_67d2j"]
 [ext_resource type="Texture2D" uid="uid://c5a6prxvwig2t" path="res://assets/Sunnyside_World_Assets/UI/pickaxe.png" id="2_gcyfs"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://cajq8ygywa5rq" path="res://assets/Sunnyside_World_Assets/UI/water.png" id="4_06rhb"]
 [ext_resource type="Texture2D" uid="uid://2vwjmdv7a0si" path="res://assets/Sunnyside_World_Assets/UI/shovel.png" id="6_6cmhi"]
 [ext_resource type="Texture2D" uid="uid://c56fsjdasd7kj" path="res://assets/cozy farm/farming/seeds.png" id="6_upg76"]
+[ext_resource type="Script" path="res://scripts/goals_label.gd" id="9_gxdec"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2jnwn"]
 atlas = ExtResource("1_67d2j")
@@ -182,3 +183,33 @@ offset_right = 326.0
 offset_bottom = 352.0
 texture = SubResource("AtlasTexture_4h8i3")
 stretch_mode = 2
+
+[node name="goals" type="Control" parent="."]
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 0
+offset_left = 329.0
+offset_top = 33.0
+offset_right = 351.0
+offset_bottom = 49.0
+script = ExtResource("9_gxdec")
+
+[node name="WoodGoal" type="Label" parent="goals"]
+offset_left = 237.0
+offset_top = -32.0
+offset_right = 277.0
+offset_bottom = -9.0
+
+[node name="StoneGoal" type="Label" parent="goals"]
+layout_mode = 0
+offset_left = 239.0
+offset_top = 1.0
+offset_right = 279.0
+offset_bottom = 24.0
+
+[node name="SeedGoal" type="Label" parent="goals"]
+layout_mode = 0
+offset_left = 222.0
+offset_top = 33.0
+offset_right = 262.0
+offset_bottom = 56.0
