@@ -34,11 +34,11 @@ func _on_next_transitions() -> void:
         print("Local pos: ", local_pos)
         print("Tile pos: ", tile_pos)
         
-        # Cek apakah tile adalah batu
+
         var tile_data = ground_tilemap.get_cell_tile_data(tile_pos)
         if tile_data and ground_tilemap.get_cell_atlas_coords(tile_pos) == Vector2i(50, 12):
-            # Hapus tile
-            ground_tilemap.set_cell(tile_pos, 0, Vector2i(50, 13))  # -1 untuk menghapus tile        
+            # Water the tile
+            ground_tilemap.set_cell(tile_pos, 0, Vector2i(50, 13))  
 
         transition.emit("Idle")
     pass

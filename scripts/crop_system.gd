@@ -30,7 +30,7 @@ func plant_crop(tile_pos: Vector2i, crop_type: String = "corn"):
         "type": crop_type,
         "stage": 0,
         "planted_time": Time.get_time_dict_from_system(),
-        "last_growth_time": Time.get_time_dict_from_system()
+        "growth_timer": 0.0  # Track growth time only when wet
     }
     
     planted_crops[tile_pos] = crop_data
@@ -38,27 +38,39 @@ func plant_crop(tile_pos: Vector2i, crop_type: String = "corn"):
     
     print("Planted ", crop_type, " at ", tile_pos)
 
-func _process(_delta):
-    update_crop_growth()
+func _process(delta):
+    update_crop_growth(delta)
 
-func update_crop_growth():
-    var current_time = Time.get_time_dict_from_system()
-    
+func update_crop_growth(delta):
     for tile_pos in planted_crops.keys():
         var crop = planted_crops[tile_pos]
         
-        # Calculate time since last growth
-        var time_diff = get_time_difference(crop.last_growth_time, current_time)
-        
-        if time_diff >= growth_time_per_stage and crop.stage < corn_growth_stages.size() - 1:
-            crop.stage += 1
-            crop.last_growth_time = current_time
-            update_crop_visual(tile_pos)
+        # Check if the soil is wet (required for growth)
+        if is_soil_wet(tile_pos):
+            # Only increase timer when soil is wet
+            crop.growth_timer += delta
             
-            # Check if crop is ready for harvest
-            if crop.stage == corn_growth_stages.size() - 1:
-                emit_signal("crop_ready_for_harvest", tile_pos)
-                print("Crop at ", tile_pos, " is ready for harvest!")
+            # Check if enough time has passed for next growth stage
+            if crop.growth_timer >= growth_time_per_stage and crop.stage < corn_growth_stages.size() - 1:
+                crop.stage += 1
+                crop.growth_timer = 0.0  # Reset timer for next stage
+                update_crop_visual(tile_pos)
+                
+                print("Crop at ", tile_pos, " grew to stage ", crop.stage)
+                
+                # Check if crop is ready for harvest
+                if crop.stage == corn_growth_stages.size() - 1:
+                    emit_signal("crop_ready_for_harvest", tile_pos)
+                    print("Crop at ", tile_pos, " is ready for harvest!")
+        else:
+            # Soil is dry - timer doesn't advance
+            # Optional: print message occasionally (not every frame)
+            pass
+
+func is_soil_wet(tile_pos: Vector2i) -> bool:
+    # Check if the ground tile is wet (Vector2i(50, 13))
+    var ground_coords = ground_tilemap.get_cell_atlas_coords(tile_pos)
+    return ground_coords == Vector2i(50, 13)  # Wet soil tile
 
 func update_crop_visual(tile_pos: Vector2i):
     var crop = planted_crops[tile_pos]
@@ -92,12 +104,6 @@ func harvest_crop(tile_pos: Vector2i) -> bool:
             return true
     
     return false
-
-func get_time_difference(time1: Dictionary, time2: Dictionary) -> float:
-    # Simple time difference calculation (you might want to improve this)
-    var seconds1 = time1.hour * 3600 + time1.minute * 60 + time1.second
-    var seconds2 = time2.hour * 3600 + time2.minute * 60 + time2.second
-    return abs(seconds2 - seconds1)
 
 func is_crop_harvestable(tile_pos: Vector2i) -> bool:
     if tile_pos in planted_crops:
