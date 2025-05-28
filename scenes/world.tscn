@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=4 uid="uid://bqbidmasg4ahj"]
+[gd_scene load_steps=11 format=4 uid="uid://bqbidmasg4ahj"]
 
 [ext_resource type="Texture2D" uid="uid://cktacoqjvo2p" path="res://assets/Sunnyside_World_Assets/Tileset/spr_tileset_sunnysideworld_16px.png" id="2_gxw36"]
 [ext_resource type="TileSet" uid="uid://b4tvlj4x14fb" path="res://resource/tileset.tres" id="2_h0hbv"]
 [ext_resource type="PackedScene" uid="uid://b6pjigmq51muo" path="res://scenes/player.tscn" id="2_t3brq"]
 [ext_resource type="PackedScene" uid="uid://2rxpaf6ow5l4" path="res://scenes/hud.tscn" id="3_5jvmr"]
 [ext_resource type="Texture2D" uid="uid://w6a22j7qcf2e" path="res://assets/Sunnyside_World_Assets/Tileset/spr_tileset_sunnysideworld_forest_32px.png" id="3_lcey8"]
+[ext_resource type="Script" path="res://scripts/crop_system.gd" id="6_8by0q"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_bxjd7"]
 tile_data = PackedInt32Array(0, 458753, 3, 65536, 851969, 4, 131072, 851969, 5, 1, 524289, 3, 65537, 917505, 4, 131073, 917505, 5)
@@ -1968,3 +1969,6 @@ position = Vector2(138, 101)
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Hud" parent="CanvasLayer" instance=ExtResource("3_5jvmr")]
+
+[node name="CropSystem" type="Node" parent="."]
+script = ExtResource("6_8by0q")

@@ -78,6 +78,7 @@ offset_bottom = 40.0
 script = ExtResource("1_upwne")
 
 [node name="StartButton" type="TextureButton" parent="Control"]
+layout_mode = 0
 offset_left = 286.0
 offset_top = 200.0
 offset_right = 339.0
@@ -86,6 +87,7 @@ action_mode = 0
 texture_normal = SubResource("AtlasTexture_ksova")
 
 [node name="ExitButton" type="TextureButton" parent="Control"]
+layout_mode = 0
 offset_left = 286.0
 offset_top = 260.0
 offset_right = 339.0

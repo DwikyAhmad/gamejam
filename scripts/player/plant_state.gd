@@ -5,6 +5,7 @@ extends NodeState
 
 @onready var ground_tilemap: TileMapLayer = get_tree().get_root().get_node("World/DiggedGrounds")
 @onready var plant_tilemap: TileMapLayer = get_tree().get_root().get_node("World/Plants")
+@onready var crop_system: Node = get_tree().get_root().get_node("World/CropSystem")
 var plant_tile_coords = []
 
 func _on_process(_delta : float) -> void:
@@ -39,7 +40,7 @@ func _on_next_transitions() -> void:
         var tile_data = ground_tilemap.get_cell_tile_data(tile_pos)
         if tile_data and ((ground_tilemap.get_cell_atlas_coords(tile_pos) == Vector2i(50, 12) or ground_tilemap.get_cell_atlas_coords(tile_pos) == Vector2i(50, 13))):
             plant_tile_coords.append(tile_pos)
-            plant_tilemap.set_cell(tile_pos, 2, Vector2i(53, 12))  
+            crop_system.plant_crop(tile_pos, "corn")
             Goals.goal_tracker.increment_seed()
 
     transition.emit("Idle")

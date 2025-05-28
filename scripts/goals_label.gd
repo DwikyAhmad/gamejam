@@ -5,6 +5,7 @@ extends Control
 @onready var wood_label = $WoodGoal
 @onready var stone_label = $StoneGoal
 @onready var seed_label = $SeedGoal
+@onready var harvest_label = $HarvestGoal
 
 func _ready():
     # Hubungkan sinyal dari goal tracker
@@ -19,13 +20,16 @@ func _on_goal_updated(goal_type, current, target):
         "wood": wood_label.text = "Kayu: %d/%d" % [current, target]
         "stone": stone_label.text = "Batu: %d/%d" % [current, target]
         "seed": seed_label.text = "Tanam: %d/%d" % [current, target]
+        "harvest": harvest_label.text = "Panen: %d/%d" % [current, target]
 
 func update_all_goals():
     # Update semua label goals
     var wood_progress = Goals.goal_tracker.get_progress("wood")
     var stone_progress = Goals.goal_tracker.get_progress("stone")
     var seed_progress = Goals.goal_tracker.get_progress("seed")
+    var harvest_progress = Goals.goal_tracker.get_progress("harvest")
     
     wood_label.text = "Kayu: %d/%d" % [wood_progress.current, wood_progress.target]
     stone_label.text = "Batu: %d/%d" % [stone_progress.current, stone_progress.target]
     seed_label.text = "Tanam: %d/%d" % [seed_progress.current, seed_progress.target]
+    harvest_label.text = "Panen: %d/%d" % [harvest_progress.current, harvest_progress.target]

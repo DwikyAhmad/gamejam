@@ -46,6 +46,11 @@ func _on_next_transitions() -> void:
         transition.emit('Plant')
     pass
 
+    # Add harvesting with hands (no tool selected)
+    if GameInputEvents.use_tool() \
+    && player.current_tool == DataTypes.Tools.None:
+        transition.emit('Harvest')
+
 
 func _on_enter() -> void:
     pass

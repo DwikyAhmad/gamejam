@@ -1,4 +1,4 @@
-[gd_scene load_steps=72 format=3 uid="uid://b6pjigmq51muo"]
+[gd_scene load_steps=73 format=3 uid="uid://b6pjigmq51muo"]
 
 [ext_resource type="Texture2D" uid="uid://dhjl7uxeinmhc" path="res://assets/Sunnyside_World_Assets/Characters/Goblin/PNG/spr_idle_strip9.png" id="1_0ob0u"]
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_11xwb"]
@@ -15,6 +15,7 @@
 [ext_resource type="Script" path="res://scripts/player/pickaxe_state.gd" id="13_tly2o"]
 [ext_resource type="Script" path="res://scripts/player/dig_state.gd" id="14_mywm7"]
 [ext_resource type="Script" path="res://scripts/player/plant_state.gd" id="15_3as6l"]
+[ext_resource type="Script" path="res://scripts/harvest_state.gd" id="16_iaqjx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u1w0r"]
 size = Vector2(11, 11)
@@ -482,5 +483,10 @@ animated_sprite_2d = NodePath("../../AnimatedSprite2D")
 
 [node name="Plant" type="Node" parent="StateMachine" node_paths=PackedStringArray("player", "animated_sprite_2d")]
 script = ExtResource("15_3as6l")
+player = NodePath("../..")
+animated_sprite_2d = NodePath("../../AnimatedSprite2D")
+
+[node name="Harvest" type="Node" parent="StateMachine" node_paths=PackedStringArray("player", "animated_sprite_2d")]
+script = ExtResource("16_iaqjx")
 player = NodePath("../..")
 animated_sprite_2d = NodePath("../../AnimatedSprite2D")

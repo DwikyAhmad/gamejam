@@ -196,6 +196,7 @@ offset_bottom = 49.0
 script = ExtResource("9_gxdec")
 
 [node name="WoodGoal" type="Label" parent="goals"]
+layout_mode = 0
 offset_left = 237.0
 offset_top = -32.0
 offset_right = 277.0
@@ -214,6 +215,13 @@ offset_left = 222.0
 offset_top = 33.0
 offset_right = 262.0
 offset_bottom = 56.0
+
+[node name="HarvestGoal" type="Label" parent="goals"]
+layout_mode = 0
+offset_left = 227.0
+offset_top = 64.0
+offset_right = 267.0
+offset_bottom = 87.0
 
 [node name="popup" type="Control" parent="."]
 layout_mode = 3
