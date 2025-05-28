@@ -55,3 +55,9 @@ func _on_enter() -> void:
 func _on_exit() -> void:
 
     pass
+
+# Add this function to remove harvested positions
+func remove_planted_position(tile_pos: Vector2i):
+    if tile_pos in plant_tile_coords:
+        plant_tile_coords.erase(tile_pos)
+        print("Removed position ", tile_pos, " from plant_tile_coords")

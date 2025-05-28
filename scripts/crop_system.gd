@@ -3,16 +3,19 @@ extends Node
 signal crop_ready_for_harvest(position: Vector2i)
 
 @onready var plant_tilemap: TileMapLayer = get_tree().get_root().get_node("World/Plants")
+@onready var ground_tilemap: TileMapLayer = get_tree().get_root().get_node("World/DiggedGrounds")
 
 # Dictionary to track planted crops: {Vector2i: crop_data}
 var planted_crops = {}
 
 # Crop growth stages (tile coordinates for different growth phases)
 var corn_growth_stages = [
-    Vector2i(60, 12),  # Seed/Sprout
-    Vector2i(60, 13),  # Small plant
-    Vector2i(60, 15),  # Medium plant
-    Vector2i(60, 17),  # Large plant
+    Vector2i(1, 4),  # Seed
+    Vector2i(2, 4),  # Sprout
+    Vector2i(3, 4),  # Small plant
+    Vector2i(4, 4),  # Medium plant
+    Vector2i(5, 4),  # Large plant
+    Vector2i(6, 4),  # Fully grown (harvestable)
 ]
 
 # Growth time per stage (in seconds)
@@ -60,7 +63,7 @@ func update_crop_growth():
 func update_crop_visual(tile_pos: Vector2i):
     var crop = planted_crops[tile_pos]
     if crop.type == "corn" and crop.stage < corn_growth_stages.size():
-        plant_tilemap.set_cell(tile_pos, 2, corn_growth_stages[crop.stage])
+        plant_tilemap.set_cell(tile_pos, 0, corn_growth_stages[crop.stage])
 
 func harvest_crop(tile_pos: Vector2i) -> bool:
     if tile_pos in planted_crops:
@@ -69,13 +72,23 @@ func harvest_crop(tile_pos: Vector2i) -> bool:
         # Check if crop is fully grown
         if crop.stage == corn_growth_stages.size() - 1:
             # Remove crop from tilemap and tracking
-            plant_tilemap.set_cell(tile_pos, -1)  # Remove tile
+            plant_tilemap.set_cell(tile_pos, -1)  # Remove plant tile
             planted_crops.erase(tile_pos)
             
-            # Add harvested item to inventory or increment goal
-            Goals.goal_tracker.increment_harvest()  # You'll need to add this method
+            ground_tilemap.set_cell(tile_pos, 0, Vector2i(50, 12))
             
-            print("Harvested ", crop.type, " at ", tile_pos)
+            # Remove from plant_tile_coords so it can be replanted
+            var plant_state = get_tree().get_root().get_node("World/Player/StateMachine/Plant")  # Adjust path as needed
+            if plant_state and plant_state.has_method("remove_planted_position"):
+                plant_state.remove_planted_position(tile_pos)
+                print("Removed position ", tile_pos, " from plant_tile_coords")
+            else:
+                print("Plant state not found")
+            
+            # Add harvested item to inventory or increment goal
+            Goals.goal_tracker.increment_harvest()
+            
+            print("Harvested ", crop.type, " at ", tile_pos, " - Ground ready for replanting!")
             return true
     
     return false

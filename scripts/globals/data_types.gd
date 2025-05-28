@@ -3,6 +3,7 @@ extends Node
 
 enum Tools {
     None,
+    Interact,
     Axe,
     Pickaxe,
     Water,

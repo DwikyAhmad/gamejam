@@ -1961,6 +1961,7 @@ tile_map_data = PackedByteArray("AAD4/xEAAgAoAAMAAAD4//z/AgAoAAMAAAD4//3/AgAoAAM
 tile_set = ExtResource("2_h0hbv")
 
 [node name="Plants" type="TileMapLayer" parent="."]
+position = Vector2(0, -2)
 tile_set = ExtResource("2_h0hbv")
 
 [node name="Player" parent="." instance=ExtResource("2_t3brq")]

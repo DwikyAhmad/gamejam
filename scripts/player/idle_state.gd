@@ -48,7 +48,7 @@ func _on_next_transitions() -> void:
 
     # Add harvesting with hands (no tool selected)
     if GameInputEvents.use_tool() \
-    && player.current_tool == DataTypes.Tools.None:
+    && player.current_tool == DataTypes.Tools.Interact:
         transition.emit('Harvest')
 
 

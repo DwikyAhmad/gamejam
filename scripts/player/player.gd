@@ -1,7 +1,7 @@
 class_name Player
 extends CharacterBody2D
 
-static var current_tool: DataTypes.Tools = DataTypes.Tools.Axe
+static var current_tool: DataTypes.Tools = DataTypes.Tools.Interact
 
 var player_direction: Vector2
 
