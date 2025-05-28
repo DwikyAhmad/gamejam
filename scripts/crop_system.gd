@@ -64,11 +64,9 @@ func update_crop_growth(delta):
                     print("Crop at ", tile_pos, " is ready for harvest!")
         else:
             # Soil is dry - timer doesn't advance
-            # Optional: print message occasionally (not every frame)
             pass
 
 func is_soil_wet(tile_pos: Vector2i) -> bool:
-    # Check if the ground tile is wet (Vector2i(50, 13))
     var ground_coords = ground_tilemap.get_cell_atlas_coords(tile_pos)
     return ground_coords == Vector2i(50, 13)  # Wet soil tile
 
@@ -90,7 +88,7 @@ func harvest_crop(tile_pos: Vector2i) -> bool:
             ground_tilemap.set_cell(tile_pos, 0, Vector2i(50, 12))
             
             # Remove from plant_tile_coords so it can be replanted
-            var plant_state = get_tree().get_root().get_node("World/Player/StateMachine/Plant")  # Adjust path as needed
+            var plant_state = get_tree().get_root().get_node("World/Player/StateMachine/Plant")
             if plant_state and plant_state.has_method("remove_planted_position"):
                 plant_state.remove_planted_position(tile_pos)
                 print("Removed position ", tile_pos, " from plant_tile_coords")

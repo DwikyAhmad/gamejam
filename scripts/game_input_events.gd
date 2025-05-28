@@ -5,14 +5,10 @@ static var direction: Vector2
 static func movement_input() -> Vector2:
     direction = Vector2.ZERO
 
-    if Input.is_action_pressed("up"):
-        direction.y = -1
-    if Input.is_action_pressed("right"):
-        direction.x = 1
-    if Input.is_action_pressed("down"):
-        direction.y = 1
-    if Input.is_action_pressed("left"):
-        direction.x = -1
+    direction = Vector2(
+        Input.get_action_strength("right") - Input.get_action_strength("left"),
+        Input.get_action_strength("down") - Input.get_action_strength("up")
+    )
 
     return direction
     

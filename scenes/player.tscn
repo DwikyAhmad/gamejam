@@ -15,7 +15,7 @@
 [ext_resource type="Script" path="res://scripts/player/pickaxe_state.gd" id="13_tly2o"]
 [ext_resource type="Script" path="res://scripts/player/dig_state.gd" id="14_mywm7"]
 [ext_resource type="Script" path="res://scripts/player/plant_state.gd" id="15_3as6l"]
-[ext_resource type="Script" path="res://scripts/harvest_state.gd" id="16_iaqjx"]
+[ext_resource type="Script" path="res://scripts/player/harvest_state.gd" id="16_kfgmx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u1w0r"]
 size = Vector2(11, 11)
@@ -486,7 +486,5 @@ script = ExtResource("15_3as6l")
 player = NodePath("../..")
 animated_sprite_2d = NodePath("../../AnimatedSprite2D")
 
-[node name="Harvest" type="Node" parent="StateMachine" node_paths=PackedStringArray("player", "animated_sprite_2d")]
-script = ExtResource("16_iaqjx")
-player = NodePath("../..")
-animated_sprite_2d = NodePath("../../AnimatedSprite2D")
+[node name="Harvest" type="Node" parent="StateMachine"]
+script = ExtResource("16_kfgmx")

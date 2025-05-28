@@ -3,9 +3,8 @@ extends NodeState
 @export var player: Player
 @export var animated_sprite_2d: AnimatedSprite2D
 
-# Gunakan onready var untuk mendapatkan referensi ke tilemap
 @onready var terrain_tilemap: TileMapLayer = get_tree().get_root().get_node("World/Terrain")
-@onready var ground_tilemap: TileMapLayer = get_tree().get_root().get_node("World/DiggedGrounds") # Sesuaikan dengan path tilemap di scene world
+@onready var ground_tilemap: TileMapLayer = get_tree().get_root().get_node("World/DiggedGrounds")
 var digged_tile_coords = []
 
 func _on_process(_delta: float) -> void:
@@ -44,8 +43,7 @@ func _on_next_transitions() -> void:
             if !tile_data and (terrain_tilemap.get_cell_atlas_coords(tile_pos) == Vector2i(11, 7) 
             || terrain_tilemap.get_cell_atlas_coords(tile_pos) == Vector2i(10, 8)):
                 # Ganti dengan tile yang sudah digali
-                # Sesuaikan source_id dan atlas_coords dengan tile yang digali di tileset Anda
-                ground_tilemap.set_cell(tile_pos, 0, Vector2i(50, 12)) # Sesuaikan koordinat atlas untuk tile yang digali
+                ground_tilemap.set_cell(tile_pos, 0, Vector2i(50, 12))
                 digged_tile_coords.append(tile_pos)
 
         transition.emit("Idle")
